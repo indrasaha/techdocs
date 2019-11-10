@@ -1,0 +1,123 @@
+- VM creation
+- Java installation
+- Jenkins installation
+    1  cls
+    2  clear
+    3  sudo apt update
+    4  java -version
+    5  ping 8.8.8.8
+    6  ping 192.168.56.1
+    7  sudo apt-get update
+    8  sudo apt-get install virtualbox-guest
+    9  sudo apt-get install virtualbox-guest-x11
+   10  sudo VBoxClient --clipboard
+   11  reboot
+   12  sudo apt-get install virtualbox-guest-dkms
+   13  reboot
+   14  ping 8.8.8.8
+   15  ping 192.168.56.1
+   16  ipcongig
+   17  ifconfig
+   18  ping 192.168.56.1
+   19  reboot
+   20  ping 10.0.2.6
+   21  clear
+   22  sudo apt update
+   23  apt list --upgradable
+   24  sudo apt update
+   25  apt list --upgradable
+   26  sudo apt update
+   27  clear
+   28  sudo apt install openjdk-8-jdk openjdk-8-jre
+   29  clear
+   30  java -version
+   31  echo JAVA_HOME
+   32  echo $JAVA_HOME
+   33  javac -version
+   34  ls /usr/lib/
+   35  ls /usr/lib/jvm/
+   36  ls /etc/environment 
+   37  cat /etc/environment 
+   38  clear
+   39  cat >> /etc/environment <<EOL
+   40  JAVA_HOME= /usr/lib/jvm/java-8-openjdk-amd64
+   41  JRE_HOME=/usr/lib/jvm/java-8-openjdk-amd64/jre
+   42  EOL
+   43  ls -l cat >> /etc/environment <<EOL
+   44  JAVA_HOME= /usr/lib/jvm/java-8-openjdk-amd64
+   45  JRE_HOME=/usr/lib/jvm/java-8-openjdk-amd64/jre
+   46  ls -l /etc/environment
+   47  chmod 711 /etc/environment
+   48  cls
+   49  clear
+   50  ls -l /etc/environment
+   51  sudo cat >> /etc/environment <<EOL
+   52  JAVA_HOME= /usr/lib/jvm/java-8-openjdk-amd64
+   53  JRE_HOME=/usr/lib/jvm/java-8-openjdk-amd64/jre
+   54  EOL
+   55  ls -l /etc/environment
+   56  sudo chmod 711 /etc/environment
+   57  ls -l /etc/environment
+   58  sudo chmod 666 /etc/environment
+   59  ls -l /etc/environment
+   60  sudo cat >> /etc/environment <<EOL
+   61  JAVA_HOME= /usr/lib/jvm/java-8-openjdk-amd64
+   62  JRE_HOME=/usr/lib/jvm/java-8-openjdk-amd64/jre
+   63  EOL
+   64  ls -l /etc/environment
+   65  cat  /etc/environment
+   66  echo $JAVA_HOME
+   67  nano  /etc/environment
+   68  echo $JAVA_HOME
+   69  cat  /etc/environment
+   70  vi  /etc/environment
+   71  nano  /etc/environment
+   72  cat  /etc/environment
+   73  echo $JAVA_HOME
+   74  exit
+   75  echo $JAVA_HOME
+   76  source /etc/environment
+   77  echo $JAVA_HOME
+   78  echo $JRE_HOME
+   79  sudo update-alternatives --config java
+   80  ls
+   81  pwd
+   82  wget -q -O - https://pkg.jenkins.io/debian/jenkins.io.key
+   83  clear
+   84  java -version
+   85  wget -q -O - https://pkg.jenkins.io/debian/jenkins-ci.org.key | sudo apt-key add -
+   86  sudo sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
+   87  sudo apt-get update
+   88  sudo apt-get install jenkins
+   89  sudo apt-get update
+   90  sudo apt-get install jenkins
+   91  systemctl status jenkins
+   92  ipconfig
+   93  ifconfig
+   94  hostnamectl
+   95  cat /etc/hostname 
+   96  sudo nano /etc/hostname 
+   97  cat /etc/hostname 
+   98  cat /etc/host
+   99  cat /etc/hosts
+  100  sudo nano /etc/hosts
+  101  exit
+  102  hostnamectl
+  103  cat /var/lib/jenkins/secrets/initialAdminPassword
+  104  sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+  105  systemctl status jenkins
+  106  sudo service jenkins stop
+  107  sudo service jenkins start
+
+
+
+
+
+
+
+
+
+
+
+
+- Git Configuration

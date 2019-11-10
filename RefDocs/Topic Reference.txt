@@ -1,0 +1,18 @@
+01- Java Performance Tuning
+02- Code Optimization
+03- Distributed Session Management
+04- Distributed Transaction Management
+05- Federated Authentication & Authorization
+07- Enterprise Security
+08- Containerization 
+09- AWS
+10- Search Optimization
+11- Performance Tuning Tools & Analysis
+13- Virtulization 
+14- Multitanancy Code / Patterns
+15- Integration Patterns
+16- Load Testing
+17- Git
+18- Network Tools
+19- Java Latest
+20- Micro Service Architecture

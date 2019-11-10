@@ -39,3 +39,44 @@ Java Performance Management
 ## Java 8 & above features
 
 ## Tenancy based Architecture
+
+
+#####################################################################
+## References
+
+Running Notes on - Java Performance Tuning
+------------------------------------------
+
+Quick Links
+https://dzone.com/refcardz/java-performance-optimization?chapter=2
+
+https://www.youtube.com/watch?v=iixQAYnBnJw&t=333s - poonam - Memory Leak
+
+https://www.youtube.com/watch?v=f2aNWtt0QRo ---- Memory Efficient code
+https://www.youtube.com/watch?v=8wHx31mvSLY ---- Performance Tuning
+https://www.youtube.com/watch?v=IBkxiWmjM-g ---- Bigmistakes : Java & Performance
+Java Version
+------------
+Java 8 by Oracle
+IBM J9 JVM
+
+Tools
+-----
+
+
+How to confirm Memory Leak?
+1- Monitor Java Heap memory usage
+2- If full GC are not able to reclaim Old Gen memory then it could be memory issue
+	- Heap size might be small
+3- Increase the heap and monitor the GC performance and test application
+4- In case there is no change, there might be potential memory leak.
+
+JConsole to monitor heap usage - live application
+Collect GC Log and analize GC logs if live monitoring not possible.
+
+Heap diagonistic
+- GC logs (heap requiments/excesive GCs/Long Pauses) - Java -XX* parameters
+- Heap dump
+- Heap Histograms
+
+Memory Efficient code

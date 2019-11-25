@@ -1,8 +1,49 @@
 ## Enterprise Architecture
+Bridge the gap between the Bussiness goal with the IT capabilities
+# Key Goals
+	- Facilate / Lead / Guide change for the organization [Primary]
+	- Stretigic Architecure vision and direction - Roadmap 
+	- Lead the architecture transformation & organizational change
+	- Ensure IT capabilities matches with the bussiness needs
+	- Establish architecture and process governance
+	- Communicate goals, metrics and values accross the organization
+# Initatives of EA
+	- Leverage technology to reduce manaual process and increase efficeincy
+	- better control costs within the organizatio for technology & Infrastructure
+	- gain better control of data accross organization to elimicate redundancy and increase accuracy
+	- increase our competitive advantange and marketshare and increase customer statisfaction
+# Decisions of EA
+	- should we leverage cloud-based infrastrucure
+	- should we create finacial report from accounting system or directly from datawarehouse
+	- how to integrate between two hetrogenious systems
+	- based on our requirement and budget should we build or buy
+	- which system to migrate first
+	
+# Model-Driven Approach [Traditional]
+	- Model first, questions later
+	- (1)What do we have current ?
+	- (2)What do we want to do ?
+	- (3)How do get there ? (roadmap)
+	- (4)Waht is the progress ? (metrics)
+	- (5)Feedback loop to (1)
+	- Zachman Framework
+	- De-merits
+		- time consuming
+		- not reflects the current state
+# Initiative-Driven Approach [Traditional]
+	- On-Demand Modeling - faster to model
+	- (1)What do we want to do ?
+	- (2)What do we have current ?
+	- (3)How do get there ? (roadmap)
+	- (4)Waht is the progress ? (metrics)
+	- No Feedback loop
+	
 - Business Architecture
 - Application Architecture
 - Information/Data Architecture
 - IT Architecture
+
+
 
 ## Application Architecture
 Architecture is driven by 

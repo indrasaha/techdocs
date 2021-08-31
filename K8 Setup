@@ -1,4 +1,15 @@
 Configure K8 Cluster (Production like)
 - Using Kubeadm
-Helm Chart
-Using Kubespray
+- Using Kubespray
+
+Deploy Application / Service 
+- Using Kubectl
+- Using Helm Chart
+
+Create Microservice using Spring Boot
+- Dockerize
+- Deploy on K8
+
+Configure Jenkins for CI/CD
+- Create E2E Job 
+

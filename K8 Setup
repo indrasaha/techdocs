@@ -1,4 +1,125 @@
-Configure K8 Cluster (Production like)
+Setting up Host
+
+## Update the package repository (All hosts)
+sudo apt-get update
+
+## Install Docker (All hosts)
+sudo apt-get install docker.io -y
+
+## Both the container runtime and the kubelet have a property called "cgroup driver", which is important for the management of cgroups on Linux machines.
+## https://kubernetes.io/docs/tasks/administer-cluster/kubeadm/configure-cgroup-driver/
+## Update cggroup as systemd
+sudo mkdir /etc/docker
+cat <<EOF | sudo tee /etc/docker/daemon.json
+{
+  "exec-opts": ["native.cgroupdriver=systemd"],
+  "log-driver": "json-file",
+  "log-opts": {
+    "max-size": "100m"
+  },
+  "storage-driver": "overlay2"
+}
+EOF
+
+## Restart Docker and enable on boot:
+sudo systemctl enable docker
+sudo systemctl daemon-reload
+sudo systemctl restart docker
+
+## Access Repos via HTTPS (All hosts)
+sudo apt-get install apt-transport-https curl -y
+
+
+## Configure K8 Cluster (Production like) -- Using Kubeadm
+## Update the apt package index and install packages needed to use the Kubernetes apt repository:
+sudo apt-get update
+sudo apt-get install -y apt-transport-https ca-certificates curl
+
+## Download the Google Cloud public signing key:
+sudo curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
+
+## Add the Kubernetes apt repository:
+echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
+
+## Update apt package index, install kubelet, kubeadm and kubectl, and pin their version:
+sudo apt-get update
+sudo apt-get install -y kubelet kubeadm kubectl
+sudo apt-mark hold kubelet kubeadm kubectl
+
+## Add the hosts entry (All hosts) for kube-master
+edit the file "/etc/hosts"
+
+## Disable SWAP (All hosts)
+free -m (to check the swap)
+sudo swapoff -a
+edit /etc/fstab to remove the swap entry (to remove permanently)
+
+## Initiate the Cluster(Only on Master node)
+sudo kubeadm init --control-plane-endpoint kube-master:6443 --pod-network-cidr 10.10.0.0/16
+========================================================================================================================
+Your Kubernetes control-plane has initialized successfully!
+
+To start using your cluster, you need to run the following as a regular user:
+
+  mkdir -p $HOME/.kube
+  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+  sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+You should now deploy a Pod network to the cluster.
+Run "kubectl apply -f [podnetwork].yaml" with one of the options listed at:
+  /docs/concepts/cluster-administration/addons/
+
+You can now join any number of machines by running the following on each node
+as root:
+
+  kubeadm join <control-plane-host>:<control-plane-port> --token <token> --discovery-token-ca-cert-hash sha256:<hash>
+=========================================================================================================================
+
+## Set the kubectl context auth to connect to the cluster(Only on Master node)
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+Alternatively, if you are the root user, you can run:
+export KUBECONFIG=/etc/kubernetes/admin.conf
+
+## Install Calico networking and network policy for on-premises deployments (Master Node only)
+## Install Calico with Kubernetes API datastore, 50 nodes or less
+curl https://docs.projectcalico.org/manifests/calico.yaml -O
+
+If you are using pod CIDR 192.168.0.0/16, skip to the next step. If you are using a different pod CIDR with kubeadm, no changes are required
+- Calico will automatically detect the CIDR based on the running configuration. 
+For other platforms, make sure you uncomment the CALICO_IPV4POOL_CIDR variable in the manifest and set it to the same value as your chosen pod CIDR.
+Customize the manifest as necessary.
+
+## Apply the manifest using the following command. (Master Node)
+kubectl apply -f calico.yaml
+
+## To Join nodes to cluster
+## Generate Token to add worker Node(Only on Master node)
+## Create a new Token
+sudo kubeadm token create
+## List Tokens created
+sudo kubeadm token list
+## Find Certificate Hash on Master
+openssl x509 -pubkey -in /etc/kubernetes/pki/ca.crt | openssl rsa -pubin -outform der 2>/dev/null | \
+   openssl dgst -sha256 -hex | sed 's/^.* //'
+
+12. Join Nodes (Only on Worker nodes)
+sudo kubeadm join --token <<TOKEN_ID>> CONTROL_PLANE_HOSTNAME:CONTROL_PLANE_PORT --discovery-token-ca-cert-hash sha256:<<HASH>>
+Example:
+sudo kubeadm join --token 1izblw.1duunrky6ph1019p kube-master:6443 --discovery-token-ca-cert-hash sha256:b0dc60a7a69659001cd55797454e90225c8820e76696a9770d4a815b2f0e2279
+
+## To access the cluster outside the master / node - like laptop
+(Optional) Controlling your cluster from machines other than the control-plane node
+In order to get a kubectl on some other computer (e.g. laptop) to talk to your cluster, 
+you need to copy the administrator kubeconfig file from your control-plane node to your workstation like this:
+
+scp root@<control-plane-host>:/etc/kubernetes/admin.conf .
+kubectl --kubeconfig ./admin.conf get nodes
+
+--------------------------------------------
+
 - Using Kubeadm
 - Using Kubespray
 
